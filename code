@@ -1,0 +1,66 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class LuckySevens_v2                  
+{
+	public static void main(String[] args)
+	{
+		Scanner input = new Scanner(System.in);
+		Random randy = new Random();
+		
+		System.out.println("Welcome to LuckySevens_v2! ");
+		System.out.print("How much money are you starting with? ");
+		double money = input.nextDouble();
+		System.out.println("Starting Money: $" + money);
+		System.out.println();
+		
+		while(money > 0)
+		{
+			System.out.print("How much money would you like to bet on this roll? ");
+			double bet = input.nextDouble();
+			
+			while(bet <= 0)
+			{
+				System.out.println("Invalid bet: $" + bet);
+				System.out.println("You can't bet negative money or more than you have!" );
+				System.out.print("How much money are you starting with? ");
+				bet = input.nextDouble();
+			}
+			
+			System.out.println("You bet: $" + bet);
+			
+			int die1 = randy.nextInt(6) + 1; 
+			int die2 = randy.nextInt(6) + 1; 
+			System.out.println("[" + die1 + "]" + "[" + die2 + "]");
+			
+			double wins = 0; 
+			
+			if(die1 == die2)
+			{
+				System.out.println(" ~ Reroll! ~ ");
+				System.out.println("You win: $" + bet);  
+			}
+		
+			else if(die1 + die2 == 7)
+			{
+				System.out.println(" ~~ Lucky Sevens! ~~ ");
+				wins = bet * 5;
+				System.out.println("You win: $" + wins); 
+				money += wins; 
+			}
+			
+			else 
+				money -= bet;
+
+			System.out.println("Money: $" + money); 
+			System.out.println();
+			
+			if(money <= 0)
+			{
+				System.out.println("You went broke!");
+				break;
+			}
+		}
+		System.out.println("Thanks for playing!");
+	}
+}
